@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         protected String doInBackground(String... strings) {
             if(emailStr.trim().equals("") || passwordStr.trim().equals("") || nameStr.trim().equals(""))
-                z = "Please enter all fields";
+                z = "Please enter all fields.";
             else {
                 try {
                     Connection con = connection.CONN();
