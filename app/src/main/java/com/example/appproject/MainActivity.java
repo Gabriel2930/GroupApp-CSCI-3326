@@ -1,6 +1,9 @@
+
 package com.example.appproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.AsyncTaskLoader;
+
 import java.sql.*;
 
 import android.app.ProgressDialog;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.appproject";
 
+
     //initialize Variables
     ConnectionClass connection;
     EditText email, password, name;
@@ -29,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         email = (EditText) findViewById(R.id.editTextEmail);
         password = (EditText) findViewById(R.id.editTextPassword);
         name = (EditText) findViewById(R.id.editTextName);
@@ -64,8 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     public class registerBtn extends AsyncTask<String, String, String>
     {
+
         String emailStr = email.getText().toString();
         String passwordStr = password.getText().toString();
         String nameStr = name.getText().toString();
@@ -147,13 +152,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(String... strings) {
-            if(emailStr.trim().equals("") || passwordStr.trim().equals(""))
+            //Add: check for name field aswell
+            if(emailStr.trim().equals("") || passwordStr.trim().equals("") || nameStr.trim().equals(""))
                 z = "Please enter all fields";
             else {
                 try {
                     Connection con = connection.CONN();
                     if (con == null) {
-                        z = "Please check your internet connection";
+                        z = "Please check your internet connection.";
                     } else {
                         String query = "SELECT * FROM Users;";
                         System.out.println(query);
@@ -171,9 +177,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 loginSuccess = true;
                             }
-
                         }
-
                         z = "Login Successful";
                         isSuccess = true;
                     }
@@ -193,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!isOwner) {
                     Intent customerIntent = new Intent(MainActivity.this, CustomerScreen.class);
+                    customerIntent.putExtra(EXTRA_MESSAGE, nameStr);
                     startActivity(customerIntent);
                 }
 
@@ -208,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 }
