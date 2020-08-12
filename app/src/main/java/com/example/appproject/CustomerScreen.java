@@ -11,15 +11,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+
+import javax.xml.transform.Result;
 
 public class CustomerScreen extends AppCompatActivity {
 
     ConnectionClass connection;
     TextView name;
-    Button Running, Here;
+    Button Running, Here, logout;
     ProgressDialog progressDialog;
 
     @SuppressLint("CutPasteId")
@@ -30,6 +34,7 @@ public class CustomerScreen extends AppCompatActivity {
         setContentView(R.layout.activity_customer_screen);
         Running = (Button) findViewById(R.id.button);
         Here = (Button)findViewById(R.id.button2);
+        logout = (Button)findViewById(R.id.button3);
 
         Intent loginname = getIntent();
         String username = loginname.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -40,6 +45,9 @@ public class CustomerScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         connection = new ConnectionClass();
         progressDialog = new ProgressDialog(this);
+        //check on click
+
+
 
         Running.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +63,25 @@ public class CustomerScreen extends AppCompatActivity {
                 imhere.execute("");
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout imhere = new logout();
+                imhere.execute("");
+            }
+        });
 
     }
 
     public class runninglate extends AsyncTask<String, String, String>
     {
+
+        String email, cname;
+        int index;
+        int sindex;
         String username = name.getText().toString();
         String z = "";
+        boolean isSuccess = false;
 
         @Override
         protected void onPreExecute(){
@@ -75,25 +95,55 @@ public class CustomerScreen extends AppCompatActivity {
                 Connection con = connection.CONN();
                 if (con == null) {
                     z = "Please check your internet connection";
+
                 } else {
-                    String query = "UPDATE `appProject`.`USER` SET `LATE` = '1' WHERE (`name` = '" + username + "');";
-                    System.out.println(query);
+                    String query1 = "select * from Users";
                     Statement stmnt = con.createStatement();
-                    stmnt.executeUpdate(query);
+                    ResultSet rs = stmnt.executeQuery(query1);
+
+                    int i;
+                    for(i = 0; rs.next(); i++){
+                        cname = rs.getString("name");
+                        email = rs.getString("email");
+                        index = rs.getInt("index");
+
+                        if(cname == username){
+                            sindex = index;
+                        }
+                    }
+                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '"+sindex+"');";
+                    System.out.println(query2);
+                    stmnt.executeUpdate(query2);
+                    z = "register Successful";
+                    isSuccess = true;
 
                 }
             } catch (Exception e) {
+                isSuccess = false;
                 z = "Exception " + e;
                 System.out.println(z);
             }
             return z;
         }
+        @Override
+        protected void onPostExecute(String s) {
+            if(isSuccess) {
+                Toast.makeText(getBaseContext(), ""+z, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.hide();
+        }
     }
 
 
     public class arrived extends AsyncTask<String, String, String> {
+
+        String email, cname;
+        int index;
+        int sindex;
         String username = name.getText().toString();
         String z = "";
+        boolean isSuccess = false;
 
         @Override
         protected void onPreExecute() {
@@ -107,18 +157,108 @@ public class CustomerScreen extends AppCompatActivity {
                 Connection con = connection.CONN();
                 if (con == null) {
                     z = "Please check your internet connection";
+
                 } else {
-                    String query = "UPDATE `appProject`.`USER` SET `HERE` = '1' WHERE (`name` = '" + username + "');";
-                    System.out.println(query);
+                    String query1 = "select * from Users";
                     Statement stmnt = con.createStatement();
-                    stmnt.executeUpdate(query);
+                    ResultSet rs = stmnt.executeQuery(query1);
+
+                    int i;
+                    for(i = 0; rs.next(); i++){
+                        cname = rs.getString("name");
+                        email = rs.getString("email");
+                        index = rs.getInt("index");
+
+                        if(cname == username){
+                            sindex = index;
+                        }
+                    }
+                    String query2 = "UPDATE `appProject`.`Users` SET `HERE` = 0b1 WHERE (`index` = '"+sindex+"');";
+                    System.out.println(query2);
+                    stmnt.executeUpdate(query2);
+                    z = "register Successful";
+                    isSuccess = true;
 
                 }
             } catch (Exception e) {
+                isSuccess = false;
                 z = "Exception " + e;
                 System.out.println(z);
             }
             return z;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            if(isSuccess) {
+                Toast.makeText(getBaseContext(), ""+z, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.hide();
+        }
+
+
+
+    }
+    public class logout extends AsyncTask<String, String, String> {
+
+
+        String email, cname;
+        int index;
+        int sindex;
+        String username = name.getText().toString();
+        String z = "";
+        boolean isSuccess = false;
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
+
+        protected String doInBackground(String... strings) {
+
+            try {
+                Connection con = connection.CONN();
+                if (con == null) {
+                    z = "Please check your internet connection";
+
+                } else {
+                    String query1 = "select * from Users";
+                    Statement stmnt = con.createStatement();
+                    ResultSet rs = stmnt.executeQuery(query1);
+
+                    int i;
+                    for(i = 0; rs.next(); i++){
+                        cname = rs.getString("name");
+                        email = rs.getString("email");
+                        index = rs.getInt("index");
+
+                        if(cname == username){
+                            sindex = index;
+                        }
+                    }
+                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b0  WHERE (`index` = '"+sindex+"');";
+                    String query3 = "UPDATE `appProject`.`Users` SET `HERE` = 0b0  WHERE (`index` = '"+sindex+"');";
+                    stmnt.executeUpdate(query2);
+                    stmnt.executeUpdate(query3);
+                    z = "register Successful";
+                    isSuccess = true;
+
+                }
+            } catch (Exception e) {
+                isSuccess = false;
+                z = "Exception " + e;
+                System.out.println(z);
+            }
+            return z;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            if(isSuccess) {
+                Toast.makeText(getBaseContext(), ""+z, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.hide();
         }
     }
 
