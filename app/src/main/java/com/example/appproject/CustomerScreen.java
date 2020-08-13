@@ -124,11 +124,12 @@ public class CustomerScreen extends AppCompatActivity {
                         email = rs.getNString("email");
                         index = rs.getInt("index");
                         System.out.print(cname);
-                        i++;
+
                         if(cname.equals(wholename) ){
                             sindex = i;
                             System.out.println(i);
                         }
+                        i++;
 
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '"+sindex+"');";
@@ -190,11 +191,12 @@ public class CustomerScreen extends AppCompatActivity {
                         email = rs.getNString("email");
                         index = rs.getInt("index");
                         System.out.print(cname);
-                        i++;
+
                         if(cname.equals(wholename) ){
                             sindex = i;
                             System.out.println(i);
                         }
+                        i++;
 
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `HERE` = 0b1 WHERE (`index` = '"+sindex+"');";
@@ -254,11 +256,13 @@ public class CustomerScreen extends AppCompatActivity {
                         email = rs.getNString("email");
                         index = rs.getInt("index");
                         System.out.print(cname);
-                        i++;
+
                         if(cname.equals(wholename) ){
                             sindex = i;
                             System.out.println(i);
                         }
+
+                        i++;
 
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `Comment` = '"+Addcomment+"' WHERE (`index` = '"+sindex+"');";
@@ -320,11 +324,13 @@ public class CustomerScreen extends AppCompatActivity {
                         email = rs.getNString("email");
                         index = rs.getInt("index");
                         System.out.print(cname);
-                        i++;
+
                         if(cname.equals(wholename) ){
                             sindex = i;
                             System.out.println(i);
                         }
+
+                        i++;
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b0  WHERE (`index` = '"+sindex+"');";
                     String query3 = "UPDATE `appProject`.`Users` SET `HERE` = 0b0  WHERE (`index` = '"+sindex+"');";
