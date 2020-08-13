@@ -22,7 +22,7 @@ import java.lang.*;
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.example.appproject";
-
+    public static final String EXTRA_MESSAGE2 = "com.example.appproject";
 
     //initialize Variables
     ConnectionClass connection;
@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 if(!isOwner) {
                     Intent customerIntent = new Intent(MainActivity.this, CustomerScreen.class);
                     customerIntent.putExtra(EXTRA_MESSAGE, nameStr);
+                    customerIntent.putExtra(EXTRA_MESSAGE2, emailStr);
                     startActivity(customerIntent);
                 }
 

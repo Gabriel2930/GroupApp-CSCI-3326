@@ -26,7 +26,7 @@ public class CustomerScreen extends AppCompatActivity {
     Button Running, Here, logout;
     ProgressDialog progressDialog;
 
-    @SuppressLint("CutPasteId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,12 +41,12 @@ public class CustomerScreen extends AppCompatActivity {
         TextView DisplayUser = findViewById(R.id.textView);
         DisplayUser.setText(username);
         name = (TextView)findViewById(R.id.textView);
+        System.out.print(name);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         connection = new ConnectionClass();
         progressDialog = new ProgressDialog(this);
         //check on click
-
 
 
         Running.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class CustomerScreen extends AppCompatActivity {
         String email, cname;
         int index;
         int sindex;
-        String username = name.getText().toString();
+
         String z = "";
         boolean isSuccess = false;
 
@@ -96,24 +96,27 @@ public class CustomerScreen extends AppCompatActivity {
                 if (con == null) {
                     z = "Please check your internet connection";
 
+
                 } else {
-                    String query1 = "select * from Users";
+                   /* String query1 = "select * from Users;";
                     Statement stmnt = con.createStatement();
                     ResultSet rs = stmnt.executeQuery(query1);
 
                     int i;
-                    for(i = 0; rs.next(); i++){
+                    for(i = 1; rs.next(); i++){
                         cname = rs.getString("name");
                         email = rs.getString("email");
                         index = rs.getInt("index");
-
-                        if(cname == username){
-                            sindex = index;
+                        System.out.print(name);
+                        if(cname == name.getText().toString()){
+                            System.out.print(name);
+                            sindex = i;
                         }
-                    }
-                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '"+sindex+"');";
+                    }*/
+                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '10');";
+                    Statement stmnt2 = con.createStatement();
                     System.out.println(query2);
-                    stmnt.executeUpdate(query2);
+                    stmnt2.executeUpdate(query2);
                     z = "register Successful";
                     isSuccess = true;
 
@@ -164,13 +167,13 @@ public class CustomerScreen extends AppCompatActivity {
                     ResultSet rs = stmnt.executeQuery(query1);
 
                     int i;
-                    for(i = 0; rs.next(); i++){
+                    for(i = 1; rs.next(); i++){
                         cname = rs.getString("name");
                         email = rs.getString("email");
                         index = rs.getInt("index");
 
                         if(cname == username){
-                            sindex = index;
+                            sindex = i;
                         }
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `HERE` = 0b1 WHERE (`index` = '"+sindex+"');";
@@ -228,13 +231,13 @@ public class CustomerScreen extends AppCompatActivity {
                     ResultSet rs = stmnt.executeQuery(query1);
 
                     int i;
-                    for(i = 0; rs.next(); i++){
+                    for(i = 1; rs.next(); i++){
                         cname = rs.getString("name");
                         email = rs.getString("email");
                         index = rs.getInt("index");
 
                         if(cname == username){
-                            sindex = index;
+                            sindex = i;
                         }
                     }
                     String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b0  WHERE (`index` = '"+sindex+"');";
