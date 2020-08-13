@@ -26,6 +26,7 @@ public class ConnectionClass {
         String ConnURL = null;
 
         try {
+
             Class.forName(classs);
 
             conn = DriverManager.getConnection(url, un, password);
