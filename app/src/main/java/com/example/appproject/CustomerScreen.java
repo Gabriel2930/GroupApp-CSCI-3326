@@ -98,7 +98,7 @@ public class CustomerScreen extends AppCompatActivity {
 
 
                 } else {
-                   /* String query1 = "select * from Users;";
+                    String query1 = "select * from Users;";
                     Statement stmnt = con.createStatement();
                     ResultSet rs = stmnt.executeQuery(query1);
 
@@ -107,13 +107,13 @@ public class CustomerScreen extends AppCompatActivity {
                         cname = rs.getString("name");
                         email = rs.getString("email");
                         index = rs.getInt("index");
-                        System.out.print(name);
+                        System.out.print(cname);
                         if(cname == name.getText().toString()){
                             System.out.print(name);
                             sindex = i;
                         }
-                    }*/
-                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '10');";
+                    }
+                    String query2 = "UPDATE `appProject`.`Users` SET `LATE` = 0b1 WHERE (`index` = '"+sindex+"');";
                     Statement stmnt2 = con.createStatement();
                     System.out.println(query2);
                     stmnt2.executeUpdate(query2);
