@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EADEDE"
-    tools:context=".MainActivity"
-    android:backgroud = "dravable/junk_food1.webp">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView_Welcome"
