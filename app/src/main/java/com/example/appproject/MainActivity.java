@@ -198,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 if(!isOwner) {
                     Intent customerIntent = new Intent(MainActivity.this, CustomerScreen.class);
                     customerIntent.putExtra(EXTRA_MESSAGE, nameStr);
-                    customerIntent.putExtra(EXTRA_MESSAGE2, emailStr);
                     startActivity(customerIntent);
+
                 }
 
                 else if(isOwner)
