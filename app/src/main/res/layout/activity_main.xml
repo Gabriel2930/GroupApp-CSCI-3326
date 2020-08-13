@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Welcome"
+        android:textColor="#85B5B0"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,10 +50,9 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_subHead"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintVertical_bias="0.121" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:background="#9A298F29"
-        android:onClick="loginOnClick"
+        android:onClick="logInBtn"
         android:text="Log In"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:background="#A64761BD"
+        android:onClick="registerBtn"
         android:text="Register"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
