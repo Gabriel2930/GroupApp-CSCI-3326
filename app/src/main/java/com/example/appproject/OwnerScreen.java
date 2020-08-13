@@ -13,6 +13,7 @@ public class OwnerScreen extends AppCompatActivity {
         setContentView(R.layout.activity_owner_screen);
     }
 
+    /*
     class Connection extends AsyncTask<String, String, String> {
 
         @Override protected String doInBackground(String... params) {
@@ -20,10 +21,14 @@ public class OwnerScreen extends AppCompatActivity {
             return null;
         }
 
+
         @Override
         protected void onPostExecute (Void result) {
 
+
+
         }
     }
+    */
 
 }
